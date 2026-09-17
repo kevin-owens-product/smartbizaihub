@@ -10,24 +10,48 @@ function App() {
     phone: '',
     projectDescription: '',
     budget: '',
-    timeline: 'immediate'
+    timeline: 'immediate',
+    website: ''
   });
+  const [status, setStatus] = useState<'idle' | 'sending' | 'ok' | 'error'>('idle');
+  const [statusMessage, setStatusMessage] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically handle the form submission
-    console.log('Form submitted:', formData);
-    setIsModalOpen(false);
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      company: '',
-      phone: '',
-      projectDescription: '',
-      budget: '',
-      timeline: 'immediate'
-    });
+    setStatus('sending');
+    setStatusMessage('');
+    try {
+      const res = await fetch('/api/inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          form_name: 'schedule-a-demo',
+          inquiry_type: 'demo',
+          ...formData
+        })
+      });
+      const data = await res.json().catch(() => ({ ok: false }));
+      if (res.ok && data.ok) {
+        setStatus('ok');
+        setStatusMessage("Thanks - your request is in. We'll be in touch shortly.");
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          phone: '',
+          projectDescription: '',
+          budget: '',
+          timeline: 'immediate',
+          website: ''
+        });
+      } else {
+        setStatus('error');
+        setStatusMessage('Something went wrong. Please try again in a moment.');
+      }
+    } catch {
+      setStatus('error');
+      setStatusMessage('Network error. Please try again in a moment.');
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -56,6 +80,20 @@ function App() {
               </div>
             </div>
             <form onSubmit={handleSubmit} className="p-6 space-y-6">
+              <input type="hidden" name="form_name" value="schedule-a-demo" />
+              <input type="hidden" name="inquiry_type" value="demo" />
+              <div className="absolute w-px h-px -m-px p-0 overflow-hidden whitespace-nowrap border-0" style={{ clip: 'rect(0 0 0 0)' }} aria-hidden="true">
+                <label htmlFor="website">Leave this field empty</label>
+                <input
+                  type="text"
+                  id="website"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={formData.website}
+                  onChange={handleInputChange}
+                />
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
@@ -172,6 +210,15 @@ function App() {
                 </div>
               </div>
 
+              {status !== 'idle' && status !== 'sending' && (
+                <p
+                  role="status"
+                  className={status === 'ok' ? 'text-sm text-green-700' : 'text-sm text-red-600'}
+                >
+                  {statusMessage}
+                </p>
+              )}
+
               <div className="flex justify-end gap-4">
                 <button
                   type="button"
@@ -182,9 +229,10 @@ function App() {
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                  disabled={status === 'sending'}
+                  className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-60"
                 >
-                  Submit Request
+                  {status === 'sending' ? 'Sending...' : 'Submit Request'}
                 </button>
               </div>
             </form>
@@ -555,5 +603,3 @@ function App() {
 }
 
 export default App;
-
-export default App
