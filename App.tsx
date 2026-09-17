@@ -552,6 +552,25 @@ function App() {
         </div>
       </section>
 
+      {/* Contact Section. Every "#contact" link on the page lands here, and the
+          button opens the same demo form the other CTAs use. */}
+      <section id="contact" className="py-20 scroll-mt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Get in Touch</h2>
+            <p className="text-gray-600 mb-8">
+              Tell us what you're trying to build and we'll follow up to set up a demo.
+            </p>
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors inline-flex items-center"
+            >
+              Schedule a Demo <ArrowRight className="ml-2 h-5 w-5" />
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
