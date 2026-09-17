@@ -426,7 +426,7 @@ function App() {
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <div>
               <img 
-                src="https://media.licdn.com/dms/image/C4E03AQGi0swkMYXByw/profile-displayphoto-shrink_800_800/0/1601978664070?e=1715212800&v=beta&t=RB_bvyJYGHDuFz3g_H3s5RT6Ow_J8JbZfzpXwYeD4vE" 
+                src="/kevin-owens.jpg" 
                 alt="Kevin Owens" 
                 className="rounded-2xl shadow-lg mb-8 w-full"
               />
