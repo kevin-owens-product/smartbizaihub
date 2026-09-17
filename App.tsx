@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Brain, Building2, Code2, MessageSquareCode, ChevronRight, ArrowRight, Users, Sparkles, Bot, BarChart3, Search, ShieldCheck, Workflow, Store, Factory, Briefcase, HeartHandshake, Lightbulb, Trophy, GraduationCap, Target, Globe2, X } from 'lucide-react';
+import { Brain, Building2, Code2, MessageSquareCode, ChevronRight, ArrowRight, Users, Sparkles, Bot, BarChart3, Search, ShieldCheck, Workflow, Store, Factory, Briefcase, HeartHandshake, Lightbulb, X } from 'lucide-react';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -418,9 +418,6 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">Leadership</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Led by industry veterans with a proven track record in technology innovation and business transformation.
-            </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 items-start">
@@ -432,56 +429,17 @@ function App() {
               />
               <div className="text-center">
                 <h3 className="text-2xl font-bold mb-2">Kevin Owens</h3>
-                <p className="text-blue-600 font-semibold mb-4">Founder & CEO</p>
+                <p className="text-blue-600 font-semibold mb-4">Founder</p>
               </div>
             </div>
 
-            <div className="space-y-8">
-              <div>
-                <h4 className="text-xl font-semibold mb-4 flex items-center">
-                  <Trophy className="h-6 w-6 text-blue-600 mr-2" />
-                  Professional Background
-                </h4>
-                <p className="text-gray-600 mb-4">
-                  A seasoned technology leader with over 20 years of experience in software development, enterprise architecture, and digital transformation. Expertise in building and scaling technology teams and delivering innovative solutions for Fortune 500 companies.
-                </p>
-              </div>
-
-              <div>
-                <h4 className="text-xl font-semibold mb-4 flex items-center">
-                  <GraduationCap className="h-6 w-6 text-blue-600 mr-2" />
-                  Education & Expertise
-                </h4>
-                <ul className="text-gray-600 space-y-2">
-                  <li>• BS in Computer Science from University of Maryland</li>
-                  <li>• AWS Certified Solutions Architect</li>
-                  <li>• Expert in Cloud Architecture and AI Integration</li>
-                  <li>• Specialized in Enterprise Digital Transformation</li>
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="text-xl font-semibold mb-4 flex items-center">
-                  <Target className="h-6 w-6 text-blue-600 mr-2" />
-                  Key Achievements
-                </h4>
-                <ul className="text-gray-600 space-y-2">
-                  <li>• Led digital transformation initiatives for major enterprises</li>
-                  <li>• Developed innovative AI solutions for business automation</li>
-                  <li>• Built and managed high-performing technology teams</li>
-                  <li>• Successfully delivered complex enterprise projects</li>
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="text-xl font-semibold mb-4 flex items-center">
-                  <Globe2 className="h-6 w-6 text-blue-600 mr-2" />
-                  Industry Impact
-                </h4>
-                <p className="text-gray-600">
-                  Recognized thought leader in AI and digital transformation, with a proven track record of helping businesses leverage technology for competitive advantage. Regular speaker at technology conferences and industry events.
-                </p>
-              </div>
+            <div>
+              <p className="text-gray-600">
+                Canonical bio:{' '}
+                <a href="https://kevinowens.com/about" className="text-blue-600 hover:underline">
+                  https://kevinowens.com/about
+                </a>
+              </p>
             </div>
           </div>
         </div>
