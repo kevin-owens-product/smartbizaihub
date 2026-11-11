@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FAQS } from './content.ts';
 import { ClipboardCheck, MessagesSquare, ArrowRight, ArrowUpRight, Users, Sparkles, Bot, Receipt, CalendarClock, Workflow, Store, Wrench, Briefcase, PhoneCall, Lightbulb, X, Check } from 'lucide-react';
 
 const FAMILY_SITES = [
@@ -532,6 +533,25 @@ function App() {
         </div>
       </section>
 
+      {/* FAQ: the same FAQS array feeds the FAQPage JSON-LD in the built HTML. */}
+      <section id="faq" className="py-20 sm:py-24 bg-paper border-t border-line scroll-mt-16">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Eyebrow>Questions</Eyebrow>
+          <h2 className="section-title mt-3">What owners ask first.</h2>
+          <div className="mt-10 space-y-3">
+            {FAQS.map((f, i) => (
+              <details key={f.q} className="card group p-6" open={i === 0}>
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-lg font-semibold tracking-tight">
+                  <h3>{f.q}</h3>
+                  <span aria-hidden="true" className="text-muted transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <p className="mt-3 text-[15px] leading-relaxed text-muted">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA + contact. Every "#contact" link on the page lands here, and the
           button opens the same scoping-call form the other CTAs use. */}
       <section id="contact" className="hero-dark py-20 sm:py-28 scroll-mt-16">
@@ -571,6 +591,7 @@ function App() {
                 <li><a href="#services" className="hover:text-white">How it works</a></li>
                 <li><a href="#solutions" className="hover:text-white">Pilot ideas</a></li>
                 <li><a href="#about" className="hover:text-white">Who runs it</a></li>
+                <li><a href="#faq" className="hover:text-white">Questions</a></li>
                 <li><a href="#contact" className="hover:text-white">Contact</a></li>
               </ul>
             </div>
