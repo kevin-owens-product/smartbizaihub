@@ -1,3 +1,81 @@
+@import '@fontsource-variable/inter';
+@import '@fontsource/inter-tight/600.css';
+@import '@fontsource/inter-tight/700.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/600.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { font-feature-settings: 'ss01', 'cv11'; -webkit-font-smoothing: antialiased; }
+  ::selection { background: #2b4fd8; color: #fff; }
+  :focus-visible { outline: 2px solid #2b4fd8; outline-offset: 2px; }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-ink text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-px hover:bg-ink-soft hover:shadow-lg;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-full border border-line bg-white text-sm font-semibold text-ink transition-colors hover:border-ink/40;
+  }
+  .btn-on-dark {
+    @apply inline-flex items-center justify-center rounded-full bg-white text-sm font-semibold text-ink transition-all duration-200 hover:-translate-y-px hover:bg-paper;
+  }
+  .pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-line bg-white/80 px-3 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-accent shadow-sm;
+  }
+  .section-title {
+    @apply font-display text-3xl font-semibold leading-[1.08] tracking-[-0.03em] text-ink sm:text-4xl lg:text-[2.6rem];
+  }
+  .group-label {
+    @apply font-mono text-xs font-semibold uppercase tracking-[0.14em] text-muted;
+  }
+  .card {
+    @apply rounded-[20px] border border-line bg-white transition-all duration-200 hover:-translate-y-0.5;
+    box-shadow: 0 1px 0 rgba(15, 23, 42, 0.04), 0 1px 3px rgba(15, 23, 42, 0.06);
+  }
+  .card:hover { box-shadow: 0 1px 0 rgba(15, 23, 42, 0.06), 0 12px 28px -10px rgba(15, 23, 42, 0.18); }
+  .icon-chip {
+    @apply grid h-10 w-10 place-items-center rounded-xl bg-ink text-white;
+  }
+  .text-gradient {
+    background-image: linear-gradient(100deg, #2b4fd8 0%, #0f9f74 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .text-gradient-dark {
+    background-image: linear-gradient(100deg, #9db8ff 0%, #86efc4 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero-light {
+    background:
+      radial-gradient(55% 50% at 85% 0%, rgba(79, 123, 255, 0.14), transparent 65%),
+      radial-gradient(40% 40% at 5% 100%, rgba(52, 211, 153, 0.10), transparent 70%),
+      linear-gradient(rgba(11, 13, 18, 0.035) 1px, transparent 1px) 0 0 / 56px 56px,
+      linear-gradient(90deg, rgba(11, 13, 18, 0.035) 1px, transparent 1px) 0 0 / 56px 56px,
+      linear-gradient(180deg, #ffffff 0%, #f5f6f8 100%);
+  }
+  .hero-dark {
+    background:
+      radial-gradient(55% 60% at 50% 0%, rgba(79, 123, 255, 0.32), transparent 70%),
+      radial-gradient(40% 50% at 12% 100%, rgba(52, 211, 153, 0.12), transparent 70%),
+      linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px) 0 0 / 56px 56px,
+      linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px) 0 0 / 56px 56px,
+      linear-gradient(180deg, #07080c 0%, #0b0d12 60%, #10131b 100%);
+  }
+  .pilot-card {
+    @apply rounded-3xl border border-white/10 p-6 sm:p-7;
+    background:
+      radial-gradient(70% 60% at 90% 0%, rgba(79, 123, 255, 0.35), transparent 70%),
+      linear-gradient(180deg, #10131b 0%, #0b0d12 100%);
+    box-shadow: 0 30px 80px -40px rgba(79, 123, 255, 0.65);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card:hover, .btn-primary:hover, .btn-on-dark:hover { transform: none; }
+}
