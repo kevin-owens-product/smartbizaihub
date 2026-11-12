@@ -2,6 +2,10 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { FAQS } from './content.ts';
 import { ClipboardCheck, MessagesSquare, ArrowRight, ArrowUpRight, Users, Sparkles, Bot, Receipt, CalendarClock, Workflow, Store, Wrench, Briefcase, PhoneCall, Lightbulb, X, Check, Menu, CheckCircle2 } from 'lucide-react';
 
+// Kevin's Google Calendar appointment page. Linked (not embedded), so it needs
+// no CSP change; it sits alongside the scoping-call form, which stays.
+const BOOKING_URL = 'https://calendar.app.google/U4e4ETunoZaib7im8';
+
 const FAMILY_SITES = [
   { name: 'Kevin Owens', href: 'https://kevinowens.com', descriptor: 'Personal hub & writing', here: false },
   { name: 'ProductExec', href: 'https://productexec.co', descriptor: 'AI value creation for private equity', here: false },
@@ -65,7 +69,6 @@ const EMPTY_FORM = {
   company: '',
   phone: '',
   projectDescription: '',
-  budget: '',
   timeline: '',
   website: ''
 };
@@ -265,6 +268,14 @@ function ScopingDialog({ onClose }: { onClose: () => void }) {
               Kevin will reply within one business day at <span className="font-semibold text-ink break-all">{sentTo}</span> to
               set up your free 30-minute call. There is nothing else you need to do for now.
             </p>
+            <p className="mt-3 text-[15px] leading-relaxed text-gray-600">
+              Rather not wait?{' '}
+              <a href={BOOKING_URL} target="_blank" rel="noopener" className="inline-flex min-h-[44px] items-center font-semibold text-accent underline underline-offset-2 hover:text-ink">
+                Pick a time on the calendar
+                <ArrowUpRight className="ml-1 h-4 w-4" aria-hidden="true" />
+                <span className="sr-only"> (opens in a new tab)</span>
+              </a>
+            </p>
             <button type="button" onClick={onClose} className="btn-primary mt-8 min-h-[44px] px-8 py-2.5">
               Close
             </button>
@@ -286,6 +297,13 @@ function ScopingDialog({ onClose }: { onClose: () => void }) {
           <p className="mt-2 text-sm text-gray-600">
             Thirty minutes, no charge. You describe the job that eats your week; Kevin tells you
             whether AI is worth pointing at it, and what a first pilot would look like.
+          </p>
+          <p className="mt-2 text-sm text-gray-600">
+            <a href={BOOKING_URL} target="_blank" rel="noopener" className="inline-flex min-h-[44px] items-center font-semibold text-accent underline underline-offset-2 hover:text-ink">
+              Or pick a time on the calendar
+              <ArrowUpRight className="ml-1 h-4 w-4" aria-hidden="true" />
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
           </p>
         </div>
         <form onSubmit={handleSubmit} noValidate className="p-6">
@@ -393,24 +411,6 @@ function ScopingDialog({ onClose }: { onClose: () => void }) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-2">
-                What could you spend on a first pilot?
-              </label>
-              <select
-                id="budget"
-                name="budget"
-                value={formData.budget}
-                onChange={handleInputChange}
-                className={inputClass(false)}
-              >
-                <option value="">Not sure yet</option>
-                <option value="under-2500">Under $2,500</option>
-                <option value="2500-7500">$2,500 - $7,500</option>
-                <option value="7500-15000">$7,500 - $15,000</option>
-                <option value="15000+">$15,000+</option>
-              </select>
-            </div>
             <div>
               <label htmlFor="timeline" className="block text-sm font-medium text-gray-700 mb-2">
                 When would you want to start?
@@ -582,6 +582,13 @@ function App() {
                   See what a pilot looks like
                 </a>
               </div>
+              <p className="mt-3 text-sm text-muted">
+                <a href={BOOKING_URL} target="_blank" rel="noopener" className="inline-flex min-h-[44px] items-center font-semibold text-accent underline underline-offset-2 hover:text-ink">
+                  Or pick a time on the calendar
+                  <ArrowUpRight className="ml-1 h-4 w-4" aria-hidden="true" />
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              </p>
             </div>
 
             <aside className="pilot-card" aria-label="What a pilot looks like">
@@ -819,6 +826,13 @@ function App() {
           >
             Book a free 30-minute call <ArrowRight className="ml-2 h-4 w-4" />
           </button>
+          <p className="mt-3 text-sm">
+            <a href={BOOKING_URL} target="_blank" rel="noopener" className="inline-flex min-h-[44px] items-center font-semibold text-white/80 underline underline-offset-2 hover:text-white">
+              Or pick a time on the calendar
+              <ArrowUpRight className="ml-1 h-4 w-4" aria-hidden="true" />
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
+          </p>
         </div>
       </section>
       </main>
