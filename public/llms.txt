@@ -3,7 +3,7 @@
 > Smart Biz AI Hub scopes, builds and measures a first AI pilot for businesses with 5 to 50 people: one job that eats the owner's week, automated inside the tools they already use, with one number agreed up front and checked at 30, 60 and 90 days. It is run by Kevin Owens.
 
 **Website**: https://smartbizaihub.com/
-**Start here**: a free 30-minute scoping call, requested from https://smartbizaihub.com/#contact (no email address is published)
+**Start here**: a free 30-minute scoping call, requested from https://smartbizaihub.com/#contact or booked directly at https://calendar.app.google/U4e4ETunoZaib7im8 (no email address is published)
 
 ## How it works
 
@@ -13,7 +13,7 @@
 
 ## Typical pilots
 
-- **Work that comes in**: missed calls and enquiries; quotes and follow-ups; scheduling and reminders.
+- **Work that comes in**: missed calls and inquiries; quotes and follow-ups; scheduling and reminders.
 - **Work that piles up**: invoices and receipts; the same ten emails every week; product listings and stock.
 - **Where it usually starts**: trades and field work (quoting, scheduling, missed calls), and small professional firms (intake, document drafting, weekly reports; anything regulated stays under a human sign-off).
 
@@ -34,5 +34,5 @@
 ## Related sites
 
 - **Kevin Owens** (personal hub and writing): https://kevinowens.com
-- **ProductExec** (AI value creation for PE): https://productexec.co
+- **ProductExec** (AI value creation for private equity): https://productexec.co
 - **Enterprise AI Studio** (AI implementation): https://enterpriseaistudio.com

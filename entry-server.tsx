@@ -33,10 +33,13 @@ export const jsonLd = [
     audience: { '@type': 'BusinessAudience', audienceType: 'Small businesses with 5 to 50 people' },
     knowsAbout: ['AI pilots for small business', 'Workflow automation', 'Missed-call handling', 'Quoting and follow-up automation', 'Scheduling automation'],
     makesOffer: [
-      { '@type': 'Offer', price: '0', priceCurrency: 'USD', itemOffered: { '@type': 'Service', name: 'Free 30-minute scoping call' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Free 30-minute scoping call' } },
       { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Fixed-scope AI pilot measured at 30, 60 and 90 days' } },
     ],
-    contactPoint: { '@type': 'ContactPoint', contactType: 'Scoping call request', url: `${SITE_URL}#contact` },
+    contactPoint: [
+      { '@type': 'ContactPoint', contactType: 'Scoping call request', url: `${SITE_URL}#contact` },
+      { '@type': 'ContactPoint', contactType: 'Book a scoping call', url: 'https://calendar.app.google/U4e4ETunoZaib7im8' },
+    ],
     sameAs: ['https://kevinowens.com', 'https://www.linkedin.com/in/kevinaowens'],
   },
   {
