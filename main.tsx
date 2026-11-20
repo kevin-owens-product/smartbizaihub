@@ -1,12 +1,15 @@
 import { StrictMode } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import App from './App.tsx';
+import { ResourcePage, resourcePages } from './Resources';
 import './index.css';
 
 const root = document.getElementById('root')!;
+const path = window.location.pathname.replace(/\/+$/, '');
+const resource = resourcePages.find(page => page.path === path);
 const app = (
   <StrictMode>
-    <App />
+    {resource ? <ResourcePage path={resource.path} /> : <App />}
   </StrictMode>
 );
 

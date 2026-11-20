@@ -1,15 +1,17 @@
 import { StrictMode } from 'react';
 import { renderToString } from 'react-dom/server';
 import App from './App.tsx';
+import { ResourcePage } from './Resources';
+export { resourcePages } from './Resources';
 import { FAQS, SITE_URL } from './content.ts';
 
 // Build-time render: scripts/prerender.mjs writes this markup into
 // dist/index.html so search crawlers, answer engines and agents that do not
 // run JavaScript see the whole page. main.tsx hydrates it in the browser.
-export function render() {
+export function render(path = '/') {
   return renderToString(
     <StrictMode>
-      <App />
+      {path === '/' ? <App /> : <ResourcePage path={path} />}
     </StrictMode>,
   );
 }
