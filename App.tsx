@@ -767,6 +767,10 @@ function App() {
         </div>
       </section>
 
+      <div className="max-w-6xl mx-auto px-4 pb-10 sm:px-6 lg:px-8">
+        <a className="font-semibold text-accent underline" href="/resources">Explore the pilot guides and readiness checklist</a>
+      </div>
+
       {/* What makes this different */}
       <section className="pb-20 sm:pb-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
