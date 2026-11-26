@@ -2,7 +2,7 @@
 import { readFile, writeFile, mkdir, rm } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { render, jsonLd, resourcePages } from '../dist-ssr/entry-server.js';
+import { render, jsonLd, resourcePages, resourceJsonLd } from '../dist-ssr/entry-server.js';
 
 const dist = new URL('../dist/', import.meta.url);
 const origin = 'https://smartbizaihub.com';
@@ -11,9 +11,10 @@ const template = await readFile(index, 'utf8');
 const root = '<div id="root"></div>';
 if (!template.includes(root)) throw new Error('dist/index.html has no empty #root to fill.');
 
-const ld = jsonLd.map(block =>
+const toScripts = (blocks) => blocks.map(block =>
   '<script type="application/ld+json">' + JSON.stringify(block).replace(/</g, '\\u003c') + '</script>'
 ).join('\n');
+const ld = toScripts(jsonLd);
 await writeFile(index, template.replace('</head>', () => ld + '\n</head>')
   .replace(root, () => '<div id="root">' + render() + '</div>'));
 
@@ -30,6 +31,7 @@ for (const page of resourcePages) {
     .replace(/((?:name|property)="(?:twitter:title|og:title)" content=")[^"]*/g, (_, prefix) => prefix + title)
     .replace(/((?:name|property)="(?:description|twitter:description|og:description)" content=")[^"]*/g, (_, prefix) => prefix + description)
     .replace(/(rel="canonical" href="|property="og:url" content=")[^"]*/g, (_, prefix) => prefix + url)
+    .replace('</head>', () => toScripts(resourceJsonLd(page.path)) + '\n</head>')
     .replace(root, () => '<div id="root">' + render(page.path) + '</div>');
   const output = fileURLToPath(new URL(page.path.slice(1) + '.html', dist));
   await mkdir(dirname(output), { recursive: true });
