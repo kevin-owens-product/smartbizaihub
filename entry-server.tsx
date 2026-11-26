@@ -2,7 +2,7 @@ import { StrictMode } from 'react';
 import { renderToString } from 'react-dom/server';
 import App from './App.tsx';
 import { ResourcePage } from './Resources';
-export { resourcePages } from './Resources';
+export { resourcePages, resourceJsonLd } from './Resources';
 import { FAQS, SITE_URL } from './content.ts';
 
 // Build-time render: scripts/prerender.mjs writes this markup into

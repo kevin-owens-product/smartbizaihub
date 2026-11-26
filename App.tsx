@@ -28,12 +28,12 @@ const STEPS = [
 
 const COMES_IN = [
   { icon: PhoneCall, title: 'Missed calls and inquiries', body: 'Answer the common questions, take the details, and hand you a tidy message with what the customer actually wants.', bullets: ['After-hours inquiries captured', 'Details in one place, not five notebooks', 'You call back knowing the job'] },
-  { icon: Receipt, title: 'Quotes and follow-ups', body: 'Turn your job notes or a phone call into a first-draft quote, and chase the ones that have gone quiet.', bullets: ['Draft quote from your own pricing', 'Follow-ups that go out on time', 'You approve before anything sends'] },
+  { icon: Receipt, title: 'Quotes and follow-ups', body: 'Turn your job notes or a phone call into a first-draft quote, and chase the ones that have gone quiet.', href: '/pilots/follow-up-automation', bullets: ['Draft quote from your own pricing', 'Follow-ups that go out on time', 'You approve before anything sends'] },
   { icon: CalendarClock, title: 'Scheduling and reminders', body: 'Fill your calendar, confirm the day before, and cut the no-shows that cost you a slot.', bullets: ['Booking without the back-and-forth', 'Reminders customers actually read', 'Gaps filled from the waiting list'] },
 ];
 
 const PILES_UP = [
-  { icon: Receipt, title: 'Invoices and receipts', body: 'Sorted, matched and ready for your bookkeeper instead of a shoebox in March.' },
+  { icon: Receipt, title: 'Invoices and receipts', body: 'Sorted, matched and ready for your bookkeeper instead of a shoebox in March.', href: '/pilots/document-intelligence' },
   { icon: MessagesSquare, title: 'The same ten emails', body: 'Drafted in your words, for the questions you answer every week. You still hit send.' },
   { icon: Store, title: 'Listings and stock', body: 'Product descriptions and updates written once, kept current across the places you sell.' },
 ];
@@ -436,7 +436,8 @@ function ScopingDialog({ onClose }: { onClose: () => void }) {
           </p>
 
           <p className="text-xs text-gray-500">
-            Your details go to Kevin only, to reply to this inquiry. No list, no sharing.
+            Your details go to Kevin only, to reply to this inquiry. No list, no sharing.{' '}
+            <a href="/privacy" className="underline">Privacy notice</a>.
           </p>
 
           <div className="flex justify-end gap-3">
@@ -480,6 +481,14 @@ function App() {
     setIsModalOpen(false);
     const opener = openerRef.current;
     if (opener) requestAnimationFrame(() => opener.focus());
+  }, []);
+
+  // Subpages link to /?book=1#contact so "Book a call" opens the dialog directly.
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get('book') === '1') {
+      setIsModalOpen(true);
+      window.history.replaceState(null, '', window.location.pathname + window.location.hash);
+    }
   }, []);
 
   useEffect(() => {
@@ -682,7 +691,7 @@ function App() {
 
           <h3 className="group-label mt-14">Work that comes in</h3>
           <div className="mt-5 grid gap-5 md:grid-cols-3">
-            {COMES_IN.map(({ icon: Icon, title, body, bullets }) => (
+            {COMES_IN.map(({ icon: Icon, title, body, bullets, href }: { icon: typeof PhoneCall; title: string; body: string; bullets: string[]; href?: string }) => (
               <div key={title} className="card p-7">
                 <span className="icon-chip"><Icon className="h-5 w-5" /></span>
                 <h4 className="mt-5 font-display text-lg font-semibold tracking-tight">{title}</h4>
@@ -692,18 +701,20 @@ function App() {
                     <li key={b} className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-mint-deep" />{b}</li>
                   ))}
                 </ul>
+                {href && <a href={href} className="mt-4 inline-block text-sm font-semibold text-accent underline">Read the pilot guide</a>}
               </div>
             ))}
           </div>
 
           <h3 className="group-label mt-14">Work that piles up</h3>
           <div className="mt-5 grid gap-5 md:grid-cols-3">
-            {PILES_UP.map(({ icon: Icon, title, body }) => (
+            {PILES_UP.map(({ icon: Icon, title, body, href }: { icon: typeof PhoneCall; title: string; body: string; href?: string }) => (
               <div key={title} className="card flex gap-4 p-6">
                 <span className="icon-chip shrink-0"><Icon className="h-5 w-5" /></span>
                 <div>
                   <h4 className="font-display text-base font-semibold tracking-tight">{title}</h4>
                   <p className="mt-1.5 text-sm leading-relaxed text-muted">{body}</p>
+                  {href && <a href={href} className="mt-3 inline-block text-sm font-semibold text-accent underline">Read the pilot guide</a>}
                 </div>
               </div>
             ))}
@@ -864,6 +875,7 @@ function App() {
             <div>
               <p className="font-mono text-xs sm:text-[11px] uppercase tracking-[0.14em] text-white/55">Elsewhere</p>
               <ul className="mt-3 text-sm text-white/70">
+                <li><a href="/resources" className="inline-block py-2.5 hover:text-white">Pilot guides</a></li>
                 <li><a href="https://kevinowens.com/about" className="inline-block py-2.5 hover:text-white">About Kevin</a></li>
                 <li><a href="https://www.linkedin.com/in/kevinaowens" className="inline-block py-2.5 hover:text-white">LinkedIn</a></li>
               </ul>
@@ -888,7 +900,7 @@ function App() {
           </div>
 
           <div className="mt-10 border-t border-white/10 pt-6 text-xs text-white/45">
-            <p>&copy; {new Date().getFullYear()} Smart Biz AI Hub. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Smart Biz AI Hub. All rights reserved. · <a href="/privacy" className="underline hover:text-white">Privacy</a></p>
           </div>
         </div>
       </footer>
